@@ -1,22 +1,13 @@
 from email.quoprimime import quote
-import os
 from twilio.rest import Client as cs
-from flask import Flask, request
+from flask import Flask, request, render_template, flash
 from twilio.twiml.messaging_response import MessagingResponse as mr
-import json
-# import creds
+import creds
 from threading import Thread
-import test
 from textblob import TextBlob
 import random
 
 app = Flask(__name__)
-
-user_Request = ""
-account_sid = os.environ['account_sid']
-auth_token = os.environ['auth_token']
-client = cs(account_sid, auth_token)
-
 
 response_sad = ["I'm so sorry that everything sucks so much right now. I love you, everyone loves you :).", "Did you drink water and eat today? I can Postmates you something yummy.", "Remember to do something kind for yourself today! Take a bath, drink some wine, and watch a bad movie.", "I admire how creative you are. You've always had such an eye for style. You don't have to worry about anything :)", "It's OK to cry and be upset. Don't feel any pressure to be #goodvibesonly.", "we all feel sad sometimes, there is nothing we can do about it. it's in human nature. don't forget that I love you and you matter to me :)"]
 response_happy = ["Your message made me do this 😄.", "Every notification from you just makes me light up.", "I want to print out that message and frame it. Honestly, it’s so beautiful. Thank you!", "Aw I’m speechless. Your message made me 🥺.", "Nothing I could text back would be as amazing as your message.", "that's great to hear, I'm happy that you are happy"]
@@ -27,20 +18,9 @@ advice = ["Stay true to yourself.", "Do what you love--not what you're told to l
 activity = ["Organize your basement.", "Learn how to make a website", "Go for a run", "Create a meal plan", "make a new music playlist", "listen to a new music genre", "Go swimming with a friend or alone", "paint the first thing you see in your room", "update your resume", "make a paper plane", "meditate"]
 nums = ["8", "10"]
 
-# account_sid = creds.account_sid
-# auth_token = creds.auth_token
-
-# client = cs(account_sid, auth_token)
-
-# client.messages.create(
-#     to = creds.phone_number,
-#     from_ = "+19032518533",
-#     body= "hello world!"
-# )
 
 
-
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/sms', methods=['POST', 'GET'])
 def sms_reply():
     global user_Request
     response = mr()
@@ -103,6 +83,30 @@ def sms_reply():
     elif polarity < 0:
         response.message(random.choice(response_sad))
     return str(response)
+
+
+@app.route('/', methods=['POST'])
+def my_form():
+    text = request.form['text']
+    phone_Num = list(text)
+    if phone_Num != "+":
+        phone_Num.insert(0, "+")
+        phone_Num.insert(1, "1")
+    if phone_Num[0] == "+":
+        account_sid = creds.account_sid
+        auth_token = creds.auth_token
+        client = cs(account_sid, auth_token)
+        try:
+            client.messages.create(
+                to = ''.join(phone_Num),
+                from_ = "+19032518533",
+                body= "Hello, How can I help you today?!\nHere are my commands:\n'0' HELP\n'1' I really need help\n'2' SUICIDE HOTLINE\n'3' JOKE\n'4' QUOTE\n'5' I'm bored\n'6' LIFE ADVICE\n'7' ABOUT DEV\nOr if you want you can just talk to me! I'm always here for you ❤️"
+            )
+            phone_Num.clear()
+        except:
+            print("Invalid Phone Number")
+    return render_template('index.html')
+
 
 def run():
     app.run(host='0.0.0.0',port=9090)

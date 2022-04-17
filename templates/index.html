@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+        <title>New Hope</title>
+    </head>
+    <body>
+        <div class="card">
+            <div class="tools">
+            <div class="circle">
+                <span class="red box"></span>
+            </div>
+            <div class="circle">
+                <span class="yellow box"></span>
+            </div>
+            <div class="circle">
+                <span class="green box"></span>
+            </div>
+            </div>
+            <div class="card__content">
+                <h1>New Hope</h1>
+                <p>New hope is a sms bot where it helps people to fight mental health issues, it tells them jokes, life lessons, quotes and he is someone that will listen to people.</p>
+                <P>He loves everyone and he loves to talk with people, he is a good listener and he is a good friend.</P>
+                <p>If you want to talk with New Hope, just enter your phone number below and he will welcome you with a hug :) ❤️️</p>
+                <form method="POST", "GET">
+                    <input name="text" placeholder="phone number" id="in" type="number" value="+1" min="10" max="12">
+                    <p id="lkj">Example phone number: 9032244477</p>
+                    <br>
+                    <input type="submit" id="button" value="Send">
+                    </input>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
