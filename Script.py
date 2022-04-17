@@ -105,6 +105,7 @@ def my_form():
             phone_Num.clear()
         except:
             print("Invalid Phone Number")
+    phone_Num.clear()
     return render_template('index.html')
 
 
