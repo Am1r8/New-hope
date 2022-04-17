@@ -8,6 +8,9 @@ New hope is a revolutionary bot that helps people in need. A bot that makes you 
 We made new hope to make people comfortable, they can learn life lessons, read quotes, read jokes and just talk. Just like a real-life friend New hope is there for you whenever you want him.
 
 ## How?!
+Here is the demo of bot:<br>
+https://youtu.be/loN6G957lqw
+
 ## What's the link?
 
 I have used Repl to deploy the website.
