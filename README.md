@@ -1,6 +1,5 @@
 
 # New Hope
-A Project made for hero hack ||<br><br>
 An app that helps people with depression, an app where people can be comfortable where they can discuss their problems.
 
 New hope is a revolutionary bot that helps people in need. A bot that makes you laugh, listens to you, loves you, and is there for you all the time 24/7.
